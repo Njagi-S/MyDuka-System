@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>The Following Products are available:</h1>
+    <table border="">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>BUYING_PRICE</th>
+                <th>SELLING_PRICE</th>
+                <th>STOCK_QUANTITY</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in myproducts %}
+            <tr>
+                <td>{{ p[0] }}</td>
+                <td>{{ p[1] }}</td>
+                <td>{{ p[2] }}</td>
+                <td>{{ p[3] }}</td>
+                <td>{{ p[4] }}</td>
+            </tr>
+        {% endfor %}
+           
+        </tbody>
+    </table>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita non voluptatibus est reprehenderit dignissimos ratione, quam sint molestias assumenda dolorum quaerat aut ad, tempora laboriosam excepturi magni vitae maiores qui.
+    Omnis dolorem ex numquam deleniti vero nam, a mollitia accusamus laudantium, sint ratione consequatur laboriosam labore animi sapiente vel dicta. Repellat dicta sit, dolores beatae reprehenderit tempora officia autem eos!</p>
+</body>
+</html>
