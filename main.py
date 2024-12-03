@@ -19,7 +19,13 @@ def contact_us():
 def products():
     cur.execute("SELECT * FROM products")
     products = cur.fetchall()
-    print(products)
+    #print(products)
     return render_template("products.html", myproducts = products)
+
+@app.route("/sales")
+def sales():
+    cur.execute("SELECT * FROM sales")
+    sales = cur.fetchall()
+    return render_template("sales.html", mysales = sales)
 
 app.run()
