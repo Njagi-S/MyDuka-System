@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"/>
 </head>
+
 <body>
     <h1>The sales Are as Follows:</h1>
-    <table border="">
+    <table border="" id="myTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -15,19 +18,31 @@
                 <th>QUANTITY</th>
                 <th>CREATED_AT</th>
             </tr>
-            <tbody>
-              {% for s in mysales %}
-                <tr>
-                    <td>{{ s[0] }}</td>
-                    <td>{{ s[1] }}</td>
-                    <td>{{ s[2] }}</td>
-                    <td>{{ s[3] }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
+        <tbody>
+            {% for s in mysales %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+                <td>{{ s[2] }}</td>
+                <td>{{ s[3] | strftime("%B %d, %Y") }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
         </thead>
     </table>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestiae consequuntur repellat, accusamus animi culpa tempora quis iusto, nihil, id harum maxime veritatis. Itaque sed natus modi harum nulla magnam.
-    Cumque ad velit est odio similique libero mollitia ipsa dignissimos asperiores laborum rerum voluptas, magni officiis ut suscipit sint, commodi consequatur cum nisi ipsam dolor beatae exercitationem. Eligendi, beatae vel!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestiae consequuntur repellat, accusamus
+        animi culpa tempora quis iusto, nihil, id harum maxime veritatis. Itaque sed natus modi harum nulla magnam.
+        Cumque ad velit est odio similique libero mollitia ipsa dignissimos asperiores laborum rerum voluptas, magni
+        officiis ut suscipit sint, commodi consequatur cum nisi ipsam dolor beatae exercitationem. Eligendi, beatae vel!
+    </p>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    
+    <script>
+        let table = new DataTable('#myTable');
+    </script>
 </body>
+
 </html>
