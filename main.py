@@ -24,8 +24,9 @@ def products():
 
 @app.route("/sales")
 def sales():
-    cur.execute("SELECT * FROM sales")
+    cur.execute("SELECT sales.id, products.name, sales.quantity, sales.created_at FROM sales JOIN products ON sales.pid = products.id;")
     sales = cur.fetchall()
+    #print(sales)
     return render_template("sales.html", mysales = sales)
 
 app.run()
