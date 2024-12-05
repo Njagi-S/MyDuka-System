@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template, request
 from database import cur
 from datetime import datetime
 app = Flask(__name__)
@@ -20,12 +20,19 @@ def about():
 def contact_us():
     return render_template("contact-us.html")
 
-@app.route("/products")
+@app.route("/products" , methods = ["GET", "POST"])
 def products():
-    cur.execute("SELECT * FROM products")
-    products = cur.fetchall()
-    #print(products)
-    return render_template("products.html", myproducts = products)
+    if request.method=="GET":
+        cur.execute("SELECT * FROM products")
+        products = cur.fetchall()
+        #print(products)
+        return render_template("products.html", myproducts = products)
+    else:
+        name = request.form["productname"]
+        buying_price = request.form["buyingprice"]
+        selling_price = request.form["sellingprice"]
+        stock_quantity = request.form["stockquantity"]
+        print(name, buying_price, selling_price, stock_quantity)
 
 @app.route("/sales")
 def sales():
