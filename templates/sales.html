@@ -9,6 +9,18 @@
 </head>
 
 <body>
+    <form action="" method="POST">
+        <label for="" >PRODUCT_ID</label>
+        <select name="pid" id="pid">
+            {% for p in myproducts %}
+            <!-- Looping iterates through myproducts-->
+            <option value="{{p[0]}}">{{p[1]}}</option>
+            {% endfor  %}
+        </select>
+        <label for="">QUANTITY</label>
+        <input type="number" name="quantity">
+        <button type="submit" value="SUBMIT">SUBMIT</button>
+    </form>
     <h1>The sales Are as Follows:</h1>
     <table border="" id="myTable">
         <thead>

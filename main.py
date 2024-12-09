@@ -41,11 +41,22 @@ def products():
         conn.commit()
         return redirect("/products")
 
-@app.route("/sales")
+@app.route("/sales", methods=["GET", "POST"])
 def sales():
-    cur.execute("SELECT sales.id, products.name, sales.quantity, sales.created_at FROM sales JOIN products ON sales.pid = products.id;")
-    sales = cur.fetchall()
-    #print(sales)
-    return render_template("sales.html", mysales = sales)
+    if request.method=="POST":
+        pid=request.form["pid"]
+        quantity=request.form["quantity"]
+        query_s="insert into sales(pid,quantity,created_at) "\
+        "values('{}','{}','{}')".format(pid,quantity,'now()')
+        cur.execute(query_s)
+        conn.commit()
+        return redirect("/sales")
+    else:
+        cur.execute("select * from products")
+        products = cur.fetchall()
+        cur.execute("SELECT sales.id, products.name, sales.quantity, sales.created_at FROM sales JOIN products ON sales.pid = products.id;")
+        sales = cur.fetchall()
+        #print(sales)
+        return render_template("sales.html", myproducts = products, mysales = sales)
 
 app.run(debug=True)
