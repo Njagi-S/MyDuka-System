@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHART DASHBOARD</title>
+</head>
+
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <div>
+        <canvas id="newChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Sales Per Days Chart
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ x | tojson | safe }},
+            datasets: [{
+                label: '# of sales',
+                data: {{ y | tojson | safe }},
+            borderWidth: 1
+                }]
+            },
+            options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+        });
+
+         // Sales Per Product Chart
+    const newChartCtx = document.getElementById('newChart');
+    new Chart(newChartCtx, {
+        type: 'bar',
+        data: {
+            labels: {{a | tojson | safe}},  
+            datasets: [{
+                label: '# sales per product',  
+                data: {{b | tojson | safe}} ,  
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    </script>
+
+    <!-- <table border="1"> -->
+    <!-- <thead> -->
+    <!-- <tr> -->
+    <!-- <th>Date</th> -->
+    <!-- <th>Total Sales</th> -->
+    <!-- </tr> -->
+    <!-- </thead> -->
+    <!-- <tbody> -->
+    <!-- {% for sale in sales_data %} -->
+    <!-- <tr> -->
+    <!-- <td>{{ sale[1] }}</td> -->
+    <!-- <td>{{ sale[0] }}</td> -->
+    <!-- </tr> -->
+    <!-- {% endfor %} -->
+    <!-- </tbody> -->
+    <!-- </table> -->
+
+
+</body>
+
+</html>
