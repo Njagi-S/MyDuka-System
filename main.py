@@ -85,8 +85,36 @@ def dashboard():
     # print("Sales Per Product (a, b):", a, b)
 
     # Debugging
-    print(sales_per_prod)
+    # print(sales_per_prod)
 
     return render_template("dashboard.html", x=x, y=y, a=a, b=b, sales_data = daily_sales)
-    
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        query = "SELECT id FROM users WHERE email = '{}' AND password = '{}' ".format(email, password)
+        cur.execute(query)
+        result = cur.fetchone()
+        if result is None:
+            return "Invalid Credentials ! "  # Returns the message
+        else:
+            # If a user is found, redirect to the dashboard
+            return redirect("/dashboard")
+    else:
+        # GET request: render the login form
+        return render_template("login.html")
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        password = request.form["password"]        
+        query = "INSERT INTO users (name, email, password) VALUES ('{}', '{}','{}')".format(name, email, password)
+        cur.execute(query)
+        conn.commit()  # Commit the changes to the database
+        return redirect("/dashboard")
+    else:
+        return render_template("register.html")  
 app.run(debug=True)
